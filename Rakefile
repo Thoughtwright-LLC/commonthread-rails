@@ -5,8 +5,8 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "commonthread-rails"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = %Q{commonthread-rails is a collection of things that make rails development better for us}
+    gem.description = %Q{commonthread-rails is a collection of things that make rails development better for us. It includes date formats, monkey patches to String, Array and NilClass to make things nicer. An Encrypter using blowfish. Also, some rails filters}
     gem.email = "hello@commonthread.com"
     gem.homepage = "http://github.com/commonthread/commonthread-rails"
     gem.authors = ["CommonThread"]
