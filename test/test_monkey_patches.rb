@@ -41,4 +41,31 @@ class TestMonkeyPatches < Test::Unit::TestCase
 			assert_equal "commonthread-rails v0.1.1".to_pretty_url, "commonthread-rails_v011"
 		end
 	end
+
+	context "Array patches" do
+		setup do
+			@numbers = (1..99).to_a
+			@scores = [50, 75, 100]
+			@letters = ('A'..'Z').to_a
+		end
+
+		should "find random item" do
+			assert @numbers.rand.is_a?(Integer)
+			assert @letters.rand.is_a?(String)
+		end
+
+		should "find maximum value of block" do
+			assert_equal @numbers.maximum{|n| n}, 99
+			assert_equal @letters.maximum{|l| l}, 'Z'
+		end
+
+		should "find minimum value of block" do
+			assert_equal @numbers.minimum{|n| n}, 1
+			assert_equal @letters.minimum{|l| l}, 'A'
+		end
+
+		should "find average value of block" do
+			assert_equal @scores.average{|s| s}, 75
+		end
+	end
 end
