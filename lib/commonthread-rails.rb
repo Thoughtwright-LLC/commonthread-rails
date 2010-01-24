@@ -1,4 +1,7 @@
 require 'commonthread/date_formats'
+
+require 'cgi' unless defined?(CGI)
+require 'digest' unless defined?(Digest)
 require 'commonthread/monkey_patches'
 
 gem 'crypt'
