@@ -93,4 +93,30 @@ class TestMonkeyPatches < Test::Unit::TestCase
 			assert nil.blank?
 		end
 	end
+
+	context "Object Patches" do
+		setup do
+			class Foo
+				def self.class_bar
+					"bar"
+				end
+
+				def instance_bar
+					"bar"
+				end
+			end
+
+			@foo = Foo.new
+		end
+
+		should "have my_method properties" do
+			assert_equal Foo.class_bar, "bar"
+			assert_equal @foo.instance_bar, "bar"
+
+			assert_equal Foo.my_methods, ["class_bar"]
+			assert_not_equal Foo.methods, ["class_bar"]
+			assert_equal @foo.my_methods, ["instance_bar"]
+			assert_not_equal @foo.methods, ["instance_bar"]
+		end
+	end
 end
