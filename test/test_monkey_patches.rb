@@ -52,6 +52,12 @@ class TestMonkeyPatches < Test::Unit::TestCase
 		should "find random item" do
 			assert @numbers.rand.is_a?(Integer)
 			assert @letters.rand.is_a?(String)
+
+			random_number = @numbers.rand
+			assert @numbers.find{|n| n == random_number}
+
+			random_letter = @letters.rand
+			assert @letters.find{|l| l == random_letter}
 		end
 
 		should "find maximum value of block" do
@@ -66,6 +72,25 @@ class TestMonkeyPatches < Test::Unit::TestCase
 
 		should "find average value of block" do
 			assert_equal @scores.average{|s| s}, 75
+		end
+	end
+
+	context "NilClass patches" do
+		should "not fail on each" do
+			assert_equal nil.each, nil
+		end
+
+		should "not fail on to_s" do
+			assert_equal nil.to_s, ""
+			assert_equal nil.to_s(:standard), ""
+		end
+
+		should "not fail on empty?" do
+			assert nil.empty?
+		end
+
+		should "not fail on blank?" do
+			assert nil.blank?
 		end
 	end
 end
