@@ -36,10 +36,6 @@ class String
   def to_pretty_url
     self.strip.downcase.gsub(/\s+/, '_').gsub(/[^\w_-]/, '')
   end
-
-  def to_html
-    BlueCloth.new(self).to_html rescue ''
-  end
 end
 
 
@@ -104,21 +100,23 @@ class Object
 end
 
 
-class ActiveRecord::Base
-  def self.[](id)
-    self.find(id)
-  end
+if defined?(ActiveRecord)
+	class ActiveRecord::Base
+		def self.[](id)
+			self.find(id)
+		end
 
-  def to_param
-    if self.respond_to?(:name) and !self.name.blank?
-      "#{self.id}-#{self.name.to_pretty_url}"
-    else
-      self.id.to_s
-    end
-  end
+		def to_param
+			if self.respond_to?(:name) and !self.name.blank?
+				"#{self.id}-#{self.name.to_pretty_url}"
+			else
+				self.id.to_s
+			end
+		end
 
-  def dom_id(prefix = nil) 
-    prefix ||= 'new' if self.new_record? 
-    [ prefix, self.class.name, self.id ].compact.join('_').downcase
-  end
+		def dom_id(prefix = nil) 
+			prefix ||= 'new' if self.new_record? 
+			[ prefix, self.class.name, self.id ].compact.join('_').downcase
+		end
+	end
 end

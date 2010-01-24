@@ -11,6 +11,7 @@ begin
     gem.homepage = "http://github.com/commonthread/commonthread-rails"
     gem.authors = ["CommonThread"]
     gem.add_development_dependency "thoughtbot-shoulda", ">= 0"
+    gem.add_dependency "crypt", ">= 0"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new

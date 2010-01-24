@@ -1,9 +1,15 @@
 require 'commonthread/date_formats'
 require 'commonthread/monkey_patches'
+
+gem 'crypt'
 require 'commonthread/encrypter'
 
-require 'commonthread/lipsum'
-ActionView::Base.send(:include, CommonThread::Lipsum::Helper)
+if defined?(ActionView)
+	require 'commonthread/lipsum'
+	ActionView::Base.send(:include, CommonThread::Lipsum::Helper)
+end
 
-require 'commonthread/filters'
-ActionController::Base.send(:include, CommonThread::Filters)
+if defined?(ActionController)
+	require 'commonthread/filters'
+	ActionController::Base.send(:include, CommonThread::Filters)
+end

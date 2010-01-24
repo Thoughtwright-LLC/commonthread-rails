@@ -14,5 +14,7 @@ common_formats = {
   :time_24 => '%H:%M' # 16:30
 }
 
-ActiveSupport::CoreExtensions::Time::Conversions::DATE_FORMATS.merge!(common_formats)
-ActiveSupport::CoreExtensions::Date::Conversions::DATE_FORMATS.merge!(common_formats)
+if defined?(ActiveSupport)
+	ActiveSupport::CoreExtensions::Time::Conversions::DATE_FORMATS.merge!(common_formats)
+	ActiveSupport::CoreExtensions::Date::Conversions::DATE_FORMATS.merge!(common_formats)
+end
