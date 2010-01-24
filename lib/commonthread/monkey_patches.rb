@@ -22,7 +22,7 @@ class String
   end
 
   def to_possesive
-    self.last.downcase == 's' ? "#{self}'" : "#{self}'s"
+    self[-1].chr.downcase == 's' ? "#{self}'" : "#{self}'s"
   end
 
   def xml_strip
