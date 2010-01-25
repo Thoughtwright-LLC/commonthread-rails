@@ -118,5 +118,17 @@ if defined?(ActiveRecord)
 			prefix ||= 'new' if self.new_record? 
 			[ prefix, self.class.name, self.id ].compact.join('_').downcase
 		end
+
+		if defined?(Resque)
+		  # This will be called by a worker when a job needs to be processed
+			def self.perform(id, method, *args)
+				find(id).send(method, *args)
+			end
+		 
+			# We can pass this any Repository instance method that we want to run later.
+			def async(method, *args)
+				Resque.enqueue(self.class, self.id, method, *args)
+			end			
+		end
 	end
 end
