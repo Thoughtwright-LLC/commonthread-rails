@@ -1,7 +1,7 @@
 class String
   def convert(pattern, template)
     output = String.new(template)
-    self.match(pattern).to_a.each_with_index{|group, index| output.gsub!("$#{index}", group)}
+    self.match(pattern).to_a.each_with_index{|group, index| output.gsub!("$#{index}", group.to_s)}
     output
   end
 
