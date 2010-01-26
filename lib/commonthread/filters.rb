@@ -17,7 +17,7 @@ module CommonThread
     #   skip_before_filter :ssl_required
     #
     def ssl_required
-      if RAILS_ENV == 'production' and !request.ssl?
+      if !(RAILS_ENV == 'development' or RAILS_ENV == 'test') and !request.ssl?
         redirect_to "https://" + request.host + request.request_uri
         return false
       end

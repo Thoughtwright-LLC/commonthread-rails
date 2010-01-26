@@ -1,11 +1,11 @@
 class Encrypter
   def self.encrypt(input)
-    return nil if input.nil?
+    return nil unless input.is_a?(String)
     Base64.encode64(self.blowfish.encrypt_string(input))
   end
 
   def self.decrypt(input)
-    return nil if input.nil?
+    return nil unless input.is_a?(String)
     self.blowfish.decrypt_string(Base64.decode64(input))
   end
 
