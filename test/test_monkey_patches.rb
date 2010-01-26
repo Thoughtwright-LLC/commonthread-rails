@@ -40,6 +40,30 @@ class TestMonkeyPatches < Test::Unit::TestCase
 			assert_equal "commonthread-rails".to_pretty_url, "commonthread-rails"
 			assert_equal "commonthread-rails v0.1.1".to_pretty_url, "commonthread-rails_v011"
 		end
+
+		should "make random strings" do
+			assert String.rand =~ /^[a-z0-9]{8}$/
+			assert String.rand(5) =~ /^[a-z0-9]{5}$/
+		end
+
+		should "check if string is an email" do
+			assert "ben@commonthread.com".email?
+			assert ! "ben.commonthread.com".email?
+		end
+
+		should "check if string is a phone number" do
+			assert "800.555.1212".phone?
+			assert "800-555-1212".phone?
+			assert "(800) 555-1212".phone?
+			assert ! "800.555.121".phone?
+		end
+
+		should "check if string is a date" do
+			assert "08/02/1980".date?
+			assert "08-02-1980".date?
+			assert "Aug 2, 1980".date?
+			assert ! "08021980".date?
+		end
 	end
 
 	context "Array patches" do
@@ -83,6 +107,10 @@ class TestMonkeyPatches < Test::Unit::TestCase
 		should "not fail on to_s" do
 			assert_equal nil.to_s, ""
 			assert_equal nil.to_s(:standard), ""
+		end
+
+		should "not fail on to_xs" do
+			assert_equal nil.to_xs, ""
 		end
 
 		should "not fail on empty?" do
