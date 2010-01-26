@@ -36,6 +36,35 @@ class String
   def to_pretty_url
     self.strip.downcase.gsub(/\s+/, '_').gsub(/[^\w_-]/, '')
   end
+
+	def self.rand(length = 8)
+    alphabet = ('a' .. 'z').to_a + ('0' .. '9').to_a
+    rand_string = ''
+    length.times do
+      rand_string << alphabet.rand
+    end
+    rand_string
+  end
+ 
+  def email?
+    if self =~ /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
+      return true
+    else
+      return false
+    end
+  end
+ 
+  def phone?
+    return false if self.nil?
+    self.gsub(/[^0123456789]/, '').length > 9
+  end
+ 
+  def date?
+    Date.parse(self)
+    true
+  rescue
+    false
+  end
 end
 
 
@@ -76,8 +105,12 @@ class NilClass
   end
 
   def to_s(format = nil)
-    ''
+    ""
   end
+
+	def to_xs
+		""
+	end
   
   def empty?
     true
@@ -120,6 +153,10 @@ if defined?(ActiveRecord)
 		end
 
 		if defined?(Resque)
+			def self.queue
+				@queue || 'default'
+			end
+
 		  # This will be called by a worker when a job needs to be processed
 			def self.perform(id, method, *args)
 				find(id).send(method, *args)
