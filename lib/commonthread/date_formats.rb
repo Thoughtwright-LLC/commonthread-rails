@@ -11,7 +11,8 @@ common_formats = {
   :medium => '%b %d %Y', # Jan 11 2008
   :day => '%A', # Sunday
   :time_12 => '%I:%M %p', # 04:30 PM
-  :time_24 => '%H:%M' # 16:30
+  :time_24 => '%H:%M', # 16:30
+  :full_time_24 => '%H:%M:%S' # 16:30:24
 }
 
 if defined?(ActiveSupport)
