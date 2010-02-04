@@ -16,3 +16,7 @@ if defined?(ActionController)
 	require 'commonthread/filters'
 	ActionController::Base.send(:include, CommonThread::Filters)
 end
+
+if defined?(Resque)
+	require 'resque/mixin/async'
+end
