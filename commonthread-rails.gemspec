@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{commonthread-rails}
-  s.version = "0.2.4"
+  s.version = "0.2.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["CommonThread"]
-  s.date = %q{2010-02-04}
+  s.date = %q{2010-03-03}
   s.description = %q{commonthread-rails is a collection of things that make rails development better for us. It includes date formats, monkey patches to String, Array and NilClass to make things nicer. An Encrypter using blowfish. Also, some rails filters}
   s.email = %q{hello@commonthread.com}
   s.extra_rdoc_files = [
@@ -37,7 +37,7 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://github.com/commonthread/commonthread-rails}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.5}
+  s.rubygems_version = %q{1.3.6}
   s.summary = %q{commonthread-rails is a collection of things that make rails development better for us}
   s.test_files = [
     "test/helper.rb",
