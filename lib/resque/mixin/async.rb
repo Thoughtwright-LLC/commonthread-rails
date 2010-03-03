@@ -44,7 +44,8 @@ module Resque
         # Performs a class method if id is nil or
         # an instance method if id has a value.
         def perform(*args)
-          id, method = args.shift(2)
+          id = args.shift
+          method = args.shift
  
           obj = id ? find(id) : self
           obj.send(method, *args)
