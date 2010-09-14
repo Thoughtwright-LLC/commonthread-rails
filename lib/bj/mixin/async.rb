@@ -1,4 +1,4 @@
-module Resque
+class Bj
   module Mixin
     # Module that provides easy queueing of jobs.
     # Transparently handles instance and class methods.
@@ -6,8 +6,7 @@ module Resque
     # If you consider this class:
     #
     #   class Repository < ActiveRecord::Base
-    #     include Resque::Mixin::Async
-    #     @queue = :high_priority
+    #     include Bj::Mixin::Async
     #
     #     def self.create_index
     #       # code
@@ -29,23 +28,18 @@ module Resque
       end
  
       def async(method, *args)
-        Resque.enqueue(self.class, id, method, *args)
+        Bj.submit "CACHE_CLASSES=true ./script/runner '#{self.class.name}.perform(#{id}, #{method.inspect})'", :stdin => args.to_yaml, :is_restartable => false
       end
  
       module ClassMethods
-        def queue
-          @queue || 'default'
-        end
-
         def async(method, *args)
-          Resque.enqueue(self, nil, method, *args)
+          Bj.submit "CACHE_CLASSES=true ./script/runner '#{self.name}.perform(nil, #{method.inspect})'", :stdin => args.to_yaml, :is_restartable => false
         end
  
         # Performs a class method if id is nil or
         # an instance method if id has a value.
-        def perform(*args)
-          id = args.shift
-          method = args.shift
+        def perform(id, method)
+          args = YAML.load(STDIN)
  
           obj = id ? find(id) : self
           obj.send(method, *args)
