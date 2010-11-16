@@ -37,6 +37,10 @@ module Resque
           @queue || 'default'
         end
 
+        def queue=(queue_name)
+          @queue = queue_name
+        end
+        
         def async(method, *args)
           Resque.enqueue(self, nil, method, *args)
         end
