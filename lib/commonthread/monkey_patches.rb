@@ -99,6 +99,20 @@ class Array
 end
 
 
+class Time
+  def beginning_of_week_sunday
+    beginning_of_week - wday.days
+  end
+end
+
+
+class Date
+  def beginning_of_week_sunday
+    beginning_of_week - wday.days
+  end
+end
+
+
 class NilClass
   def each
     nil
