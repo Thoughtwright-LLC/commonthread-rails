@@ -31,6 +31,13 @@ module Resque
       def async(method, *args)
         Resque.enqueue(self.class, id, method, *args)
       end
+
+      def async_in_queue(run_queue, method, *args)
+        orig_queue = self.class.queue
+        self.class.queue = run_queue
+        Resque.enqueue(self.class, id, method, *args)
+        self.class.queue = orig_queue
+      end
  
       module ClassMethods
         def queue
@@ -43,6 +50,13 @@ module Resque
         
         def async(method, *args)
           Resque.enqueue(self, nil, method, *args)
+        end
+ 
+        def async_in_queue(run_queue, method, *args)
+          orig_queue = self.queue
+          self.queue = run_queue
+          Resque.enqueue(self, nil, method, *args)
+          self.queue = orig_queue
         end
  
         # Performs a class method if id is nil or
