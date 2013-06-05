@@ -4,7 +4,6 @@ require 'cgi' unless defined?(CGI)
 require 'digest' unless defined?(Digest)
 require 'commonthread/monkey_patches'
 
-gem 'crypt'
 require 'commonthread/encrypter'
 
 if defined?(ActionView)

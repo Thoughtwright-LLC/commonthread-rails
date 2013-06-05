@@ -1,3 +1,5 @@
+require 'crypt/blowfish'
+
 class Encrypter
   def self.encrypt(input)
     return nil unless input.is_a?(String)
