@@ -49,10 +49,10 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_development_dependency(%q<thoughtbot-shoulda>, [">= 0"])
-      s.add_runtime_dependency(%q<crypt19-rb>, [">= 0"])
+      s.add_runtime_dependency(%q<otherinbox-crypt19>, [">= 0"])
     else
       s.add_dependency(%q<thoughtbot-shoulda>, [">= 0"])
-      s.add_dependency(%q<crypt19-rb>, [">= 0"])
+      s.add_dependency(%q<otherinbox-crypt19>, [">= 0"])
     end
   else
     s.add_dependency(%q<thoughtbot-shoulda>, [">= 0"])
