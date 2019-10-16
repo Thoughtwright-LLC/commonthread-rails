@@ -48,6 +48,7 @@ class TestMonkeyPatches < Test::Unit::TestCase
 
 		should "check if string is an email" do
 			assert "ben@commonthread.com".email?
+			assert "ben.o'neil@commonthread.com".email?
 			assert ! "ben.commonthread.com".email?
 		end
 

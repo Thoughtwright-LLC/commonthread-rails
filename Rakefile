@@ -43,7 +43,7 @@ task :test => :check_dependencies
 
 task :default => :test
 
-require 'rake/rdoctask'
+require 'rdoc/task'
 gem 'darkfish-rdoc'
 
 Rake::RDocTask.new do |rdoc|
